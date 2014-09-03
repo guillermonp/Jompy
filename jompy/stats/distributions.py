@@ -64,13 +64,16 @@ class Weibull(object):
     def cfd(self):
         """ Cumulative failure distribution """
         sample_size = len(self.sample)
+        failure_rank = np.array([i + 1 for i in range(sample_size)])
         if sample_size < 100:
-            return self.bernard_approx(sample_size)
+            return self.bernard_approx(failure_rank, sample_size)
         else:
-            return self.mean_ranks(sample_size)
+            return self.mean_ranks(failure_rank, sample_size)
 
-    def bernard_approx(self, size):
-        return (self.sample - 0.3)/(size + 0.4)
+    @staticmethod
+    def bernard_approx(rank, size):
+        return (rank - 0.3)/(size + 0.4)
 
-    def mean_ranks(self, size):
-        return self.sample / (size + 1)
+    @staticmethod
+    def mean_ranks(rank, size):
+        return rank / (size + 1)
