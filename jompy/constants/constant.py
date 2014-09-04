@@ -1,6 +1,3 @@
-""" Jompy Constant class"""
-
-
 class Constant(object):
     def __init__(self, name, value, system, unit, unit_base=None, others=None):
         self._name = name
@@ -41,4 +38,3 @@ class Constant(object):
     def unit_base(self):
         """ units as base units """
         return self._unit_base
-

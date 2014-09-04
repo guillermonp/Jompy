@@ -1,7 +1,3 @@
-"""
-Useful tools
-"""
-
 
 def is_sorted(l):
     for i, el in enumerate(l[1:]):
