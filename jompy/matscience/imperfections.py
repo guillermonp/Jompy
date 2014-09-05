@@ -5,6 +5,16 @@ import math
 
 class PointDefects(object):
     """
+    Point defects disturbs the crystal pattern modifying the properties.
+    Point defects can be classified between intrinsic and extrinsic defects.
+
+    intrinsic defects:
+        An intrinsic defect is formed when an atom is missing from a position
+        that should be filled in the crystal, creating a vacancy, or when an
+        atom occupies an interstitial site where no atom would ordinarily appear,
+        causing an interstitialcy.
+
+    extrinsic defects: are caused by solute or impurity atoms
 
     """
     def __init__(self, unit='J'):
@@ -36,22 +46,25 @@ class PointDefects(object):
         return sigmoid(-q_v/(self.k * t))
 
     def frenkel_defect(self, n, q_v, t):
-        """ Neighboring cation vacancy and cation interstitial """
+        """
+        Frenkel defect:
+            a neutral defect that is made up of a paired vacancy and interstitial.
+            Neighboring cation vacancy and cation interstitial
+        """
         return n * math.exp(-q_v/(2*self.k * t))
 
     def schottky_defect(self):
-        pass
-
-    def exp_q_v(self):
         """
-        Obtain activation energy experimental
+        Schottky defect:
+            A neutral defect that involves paired vacancies on the cation
+            an anion sublattices.
         """
         pass
 
     @staticmethod
     def defect_concentration(n, n_v):
         """
-        concentration = Nv/N
+        Ratio of vacant sites to occupied sites
             N = number of lattice sites
             Nv = number of vacancies
         """
