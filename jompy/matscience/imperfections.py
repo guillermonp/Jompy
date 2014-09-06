@@ -1,7 +1,6 @@
 from jompy.constants.constants_si import k_boltzmann, k_boltzmann_ev, n_avogrado
 from jompy.functions.core import sigmoid, n_comb_k
 import math
-from collections import OrderedDict
 
 
 class PointDefects(object):
