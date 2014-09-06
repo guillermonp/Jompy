@@ -1,4 +1,4 @@
-from jompy.matscience.imperfections import PointDefects
+from jompy.matscience.imperfections import PointDefects, comp_by_mass, comp_by_mole
 
 defects = PointDefects('eV')
 
@@ -20,3 +20,8 @@ l_sites_m3 = lattice_sites_volume * 1e6
 frenkel_defects = defects.frenkel_defect(n=l_sites_m3, q_v=2.51, t=1273)
 
 print("frenkel defects = ", frenkel_defects)
+
+
+# composition / concentration
+total_comp = comp_by_mass(m_a=4, m_b=5)
+print(total_comp)
