@@ -16,11 +16,12 @@ class Constant(object):
                             'systems: {}'.format(self._system, _systems))
 
     def __repr__(self):
-        pass
+        return '<Name: {} value: {} system: {} units: {}>'\
+            .format(self._name, self._value, self._system, self._unit)
 
     def __str__(self):
-        """ table """
-        pass
+        return ' Name: {} \n Value: {} \n System: {} \n Units: {}'\
+            .format(self._name, self._value, str.upper(self._system), self._unit)
 
     @property
     def name(self):
@@ -38,3 +39,7 @@ class Constant(object):
     def unit_base(self):
         """ units as base units """
         return self._unit_base
+
+    @property
+    def others(self):
+        return self._others
