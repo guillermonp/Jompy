@@ -122,7 +122,7 @@ class PointDefects(object):
     def entropy_change(self, w):
         """
         delta(Sc) is the change in configurational entropy and is positive.
-        Equilibrium concentration of defects is found by minimizing delta(G)
+        Equilibrium concentration of defects is found by minimizing delta(G).
 
         delta(G) = n * delta(Gf) - T * delta(Sc)
             where:
@@ -186,3 +186,35 @@ def number_moles(mass, atomic_mass):
     :param atomic_mass: atomic mass (e.g. C (carbon) = 12.011)
     """
     return mass / atomic_mass
+
+
+class Grain(object):
+
+    @staticmethod
+    def grain_average(g_size):
+        """
+        Quantify the gran size that is observed in electron micrograph images.
+        The most used method is the one defined by the American Society for
+        Tesing and Materials (ASTM).
+
+        There are 10 grain size indices.
+
+        :param n: is the grain size number
+        :return N: is the average number of gains pe square inch at a magnification
+            of 100x
+        """
+        return 2 ** (g_size - 1)
+
+    @staticmethod
+    def grain_size_number(g_avg):
+        return math.log(g_avg) / math.log(2) + 1
+
+    @staticmethod
+    def magnification_avg(factor, g_size):
+        """ N: Average number of grains per square inch per magnification factor """
+        return 2 ** (g_size - 1) * (100 / factor) ** 2
+
+    @staticmethod
+    def magnification_size(factor, g_avg):
+        """ n: grain size number given N and magnification factor """
+        return math.log(g_avg * (factor / 100) ** 2) / math.log(2) + 1
