@@ -1,4 +1,4 @@
-from jompy.matscience.imperfections import PointDefects, comp_by_mass, comp_by_mole
+from jompy.matscience.imperfections import (PointDefects, comp_by_mass, Grain)
 
 defects = PointDefects('eV')
 
@@ -25,3 +25,13 @@ print("frenkel defects = ", frenkel_defects)
 # composition / concentration
 total_comp = comp_by_mass(m_a=4, m_b=5)
 print(total_comp)
+
+
+# Grain size determination
+grain_avg = Grain.grain_average(g_size=6)
+grain_size = Grain.grain_size_number(g_avg=45)
+grain_avg_magnification = Grain.magnification_avg(factor=85, g_size=6.5)
+grain_size_magnification = Grain.magnification_size(factor=85, g_avg=62.6)
+
+print(grain_avg, grain_size)
+print(grain_avg_magnification, grain_size_magnification)
