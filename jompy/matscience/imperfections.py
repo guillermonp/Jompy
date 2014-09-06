@@ -152,9 +152,10 @@ class PointDefects(object):
 
 def comp_by_mass(m_a, m_b):
     """
+    Weight percent
 
-    :param m_a:
-    :param m_b:
+    :param m_a: mass of component A
+    :param m_b: mass of component B
     """
     total_weight = m_a + m_b
     comp_a = m_a / total_weight * 100
@@ -163,5 +164,25 @@ def comp_by_mass(m_a, m_b):
     return [comp_a, comp_b]
 
 
-def comp_by_mole():
-    pass
+def comp_by_mole(n_a, n_b):
+    """
+    Atomic percent
+
+    :param n_a: number of moles of component A
+    :param n_b: number of moles of component B
+    """
+    total_moles = n_a + n_b
+    comp_a = n_a / total_moles * 100
+    comp_b = n_b / total_moles * 100
+
+    return [comp_a, comp_b]
+
+
+def number_moles(mass, atomic_mass):
+    """
+    Number of moles of a determined mass of a hypothetical element.
+
+    :param mass: mass (g)
+    :param atomic_mass: atomic mass (e.g. C (carbon) = 12.011)
+    """
+    return mass / atomic_mass
