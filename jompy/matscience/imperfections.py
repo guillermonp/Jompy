@@ -189,20 +189,26 @@ def number_moles(mass, atomic_mass):
 
 
 class Grain(object):
+    """
+    Grain size determination:
+
+    Quantify the gran size that is observed in electron micrograph images.
+    The most used method is the one defined by the American Society for
+    Tesing and Materials (ASTM).
+
+    There are 10 grain size indices. The greater is the index the smaller is
+    the grain size.
+
+    param: n: is the grain size number (g_size)
+    param: N: is the average number of gains pe square inch at a magnification
+        of 100x (g_avg)
+
+        N = 2 ^ (n - 1)
+
+    """
 
     @staticmethod
     def grain_average(g_size):
-        """
-        Quantify the gran size that is observed in electron micrograph images.
-        The most used method is the one defined by the American Society for
-        Tesing and Materials (ASTM).
-
-        There are 10 grain size indices.
-
-        :param n: is the grain size number
-        :return N: is the average number of gains pe square inch at a magnification
-            of 100x
-        """
         return 2 ** (g_size - 1)
 
     @staticmethod
