@@ -107,7 +107,8 @@ class PointDefects(object):
         """
         return n_comb_k(n, n_i)
 
-    def w_configurations(self, n, n_v, n_i):
+    @classmethod
+    def w_configurations(cls, n, n_v, n_i):
         """
         Total number of configurations:
             W = Wv * Wi
@@ -117,7 +118,7 @@ class PointDefects(object):
         :param n_v: number of vacancies
         :param n_i: number of interstitial sites
         """
-        return self.w_interstitial(n, n_i) * self.w_vacancies(n, n_v)
+        return cls.w_interstitial(n, n_i) * cls.w_vacancies(n, n_v)
 
     def entropy_change(self, w):
         """
