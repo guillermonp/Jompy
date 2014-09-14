@@ -6,4 +6,5 @@ k_boltzmann = Constant('Boltzmann constant', 1.3806488e-23, 'si', 'J/K', 'm^2*kg
 k_boltzmann_ev = Constant('Boltzmann constant', 8.6173324e-5, 'si', 'eV/K')
 
 r_gas = Constant('Gas constant - ideal gas constant', 8.3144621, 'si', 'J/K')
+r_gas_ev = Constant('Gas constant - ideal gas constant', 5.189e19, 'si', 'eV/K')
 n_avogrado = Constant("Avogrado's number", 6.02214129e23, 'si', '1/mol')
