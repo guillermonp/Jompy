@@ -89,6 +89,7 @@ class Weibull(object):
         Compute kurtosis:
         http://mathworld.wolfram.com/WeibullDistribution.html
         """
+
         n1 = -6 * gamma(1 + 1 / self.a) ** 4
         n2 = 12 * (gamma(1 + 1 / self.a) ** 2) * gamma(1 + 2 / self.a)
         n3 = 3 * gamma(1 + 2 / self.a) ** 2
