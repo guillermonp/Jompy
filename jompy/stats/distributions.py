@@ -22,8 +22,19 @@ class Weibull(object):
         """
         return 1 - math.exp(-(x / self.b) ** self.a)
 
-    def quantile(self):
-        pass
+    def failure_rate(self, x):
+        """
+        Failure rate or hazard function:
+        Is the frequency with which a component fails, expressed, for example, in failures per hour.
+
+        """
+        return (self.a / self.b) * (x / self.b) ** (self.a - 1)
+
+    def quantile(self, p):
+        """
+        The quantile function computes inverse cumulative distribution.
+        """
+        return self.b * (- math.log(1 - p)) ** (1 / self.a)
 
     def mean(self):
         return self.b * gamma(1 + 1 / self.a)
@@ -33,6 +44,9 @@ class Weibull(object):
 
     def variance(self):
         return (self.b ** 2) * gamma(1 + 2 / self.a) - self.mean() ** 2
+
+    def std(self):
+        return math.sqrt(self.variance())
 
     def mode(self):
         if self.a > 1:
@@ -53,7 +67,6 @@ class Weibull(object):
         pass
 
     def ml(self):
-        """ Maximum likelihood """
         pass
 
 
@@ -69,9 +82,9 @@ class WeibullAnalysis(Weibull):
 
     def initial_check(self):
         """
-            data must be in ascending order
-            array 1D
+        Data must be in ascending order, otherwise modify input array 1D.
         """
+
         try:
             _data = np.asarray(self.data)
             if utils.is_sorted(_data):
@@ -83,7 +96,9 @@ class WeibullAnalysis(Weibull):
             print("incorrect input data, check format. {}".format(err.args[0]))
 
     def cfd(self):
-        """ Cumulative failure distribution """
+        """
+        Cumulative failure distribution
+        """
 
         sample_size = len(self.sample)
         failure_rank = np.array([i + 1 for i in range(sample_size)])
@@ -92,9 +107,6 @@ class WeibullAnalysis(Weibull):
             return self.bernard_approx(failure_rank, sample_size)
         else:
             return self.mean_ranks(failure_rank, sample_size)
-
-    def failure_rate(self):
-        pass
 
     @classmethod
     def bernard_approx(cls, rank, size):
