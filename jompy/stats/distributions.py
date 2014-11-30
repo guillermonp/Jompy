@@ -85,13 +85,17 @@ class Weibull(object):
         return (ex1 - ex2) / (self.variance() ** (3/2))
 
     def kurtosis(self):
-        pass
+        """
+        Compute kurtosis:
+        http://mathworld.wolfram.com/WeibullDistribution.html
+        """
+        n1 = -6 * gamma(1 + 1 / self.a) ** 4
+        n2 = 12 * (gamma(1 + 1 / self.a) ** 2) * gamma(1 + 2 / self.a)
+        n3 = 3 * gamma(1 + 2 / self.a) ** 2
+        n4 = 4 * gamma(1 + 1 / self.a) * gamma(1 + 3 / self.a)
+        n5 = gamma(1 + 4 / self.a)
 
-    def kurtosis_excess(self):
-        pass
-
-    def ml(self):
-        pass
+        return (self.b ** 4) * (n1 + n2 - n3 - n4 + n5) / (self.variance() ** 2)
 
 
 class WeibullAnalysis(Weibull):
