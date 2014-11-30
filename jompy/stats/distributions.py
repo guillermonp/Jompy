@@ -14,38 +14,57 @@ class Weibull(object):
         pdf computes the probability density at x for a Weilbull distribution
         with scale alpha and exponent beta
         """
+
         return (self.a / self.b) * (x / self.b) ** (self.a - 1) * math.exp(-(x/self.b) ** self.a)
 
     def cdf(self, x):
         """
         cdf computes the cumulative distribution function at x.
         """
+
         return 1 - math.exp(-(x / self.b) ** self.a)
 
     def failure_rate(self, x):
         """
         Failure rate or hazard function:
         Is the frequency with which a component fails, expressed, for example, in failures per hour.
-
         """
+
         return (self.a / self.b) * (x / self.b) ** (self.a - 1)
 
     def quantile(self, p):
         """
         The quantile function computes inverse cumulative distribution.
         """
+
         return self.b * (- math.log(1 - p)) ** (1 / self.a)
 
     def mean(self):
+        """
+        Mean of a Weibull random variable.
+        """
+
         return self.b * gamma(1 + 1 / self.a)
 
-    def median(self):
-        return self.b * math.log(2) ** (1 / self.a)
-
     def variance(self):
+        """
+        Variance of a Weibull random variable.
+        """
+
         return (self.b ** 2) * gamma(1 + 2 / self.a) - self.mean() ** 2
 
+    def median(self):
+        """
+        Median of a Weibull random variable
+        """
+
+        return self.b * math.log(2) ** (1 / self.a)
+
     def std(self):
+        """
+        Standard deviation - self.variance
+        """
+
         return math.sqrt(self.variance())
 
     def mode(self):
@@ -55,10 +74,15 @@ class Weibull(object):
             return 0
 
     def skewness(self):
-        ax_1 = gamma(1 + 3 / self.a) + 2 * (gamma(1 + 1 / self.a) ** 3)
-        ax_2 = 3 * (gamma(1 + 2 / self.a) * gamma(1 + 1 / self.a))
+        """
+        Compute skewness: simplified expression from
+        http://mathworld.wolfram.com/WeibullDistribution.html
+        """
 
-        return (self.b ** 3) * (ax_1 - ax_2)
+        ex1 = self.b ** 3 * gamma(1 + 3 / self.a)
+        ex2 = 3 * self.mean() * self.variance() - self.mean() ** 3
+
+        return (ex1 - ex2) / (self.variance() ** (3/2))
 
     def kurtosis(self):
         pass
