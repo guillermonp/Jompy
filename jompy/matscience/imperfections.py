@@ -24,11 +24,11 @@ class PointDefects(object):
         """
         :param unit: J or eV
         """
-        self.unit = unit
+        self._unit = unit
 
-        if self.unit == 'J':
+        if self._unit == 'J':
             self.k_b = k_boltzmann.value
-        elif self.unit == 'eV':
+        elif self._unit == 'eV':
             self.k_b = k_boltzmann_ev.value
         else:
             raise TypeError('unit {0} is not accepted. '
@@ -148,7 +148,12 @@ class PointDefects(object):
         return n_v * q_v - 2 * self.w_vacancies(n, n_v)
 
     def __repr__(self):
-        return 'Point defects, unit={0}'.format(self.unit)
+        return 'Point defects, unit={0}'.format(self._unit)
+
+    @property
+    def units(self):
+        """ SI units """
+        return self._unit
 
 
 def comp_by_mass(m_a, m_b):
