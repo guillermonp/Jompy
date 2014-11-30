@@ -7,5 +7,5 @@ Requirements
 ------------
 
 Jompy requires:
--Python 3.4
--Numpy (http://www.numpy.org/)
+- Python 3.4
+- Numpy (http://www.numpy.org/)
