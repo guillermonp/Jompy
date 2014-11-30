@@ -5,5 +5,7 @@ calculations required in the Material Science and Engineering field.
 
 Requirements
 ------------
-Python >= 3.3
-Numpy
+
+Jompy requires:
+-Python 3.4
+-Numpy (http://www.numpy.org/)
