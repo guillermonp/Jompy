@@ -6,10 +6,6 @@ def sigmoid(z):
     return 1/(1 + math.exp(-z))
 
 
-def n_comb_k(n, k):
-    return math.factorial(n)/(math.factorial(k) * math.factorial(n - k))
-
-
 def gamma(z):
     """
     Gamma function:
@@ -31,7 +27,7 @@ def gamma(z):
 
     z = complex(z)
     if z.real < 0.5:
-        #Recursion method:
+        #Recursion method: reflection formula
         return cmath.pi / (cmath.sin(cmath.pi * z) * gamma(1 - z))
     else:
         ax_1 = cmath.sqrt(cmath.pi * 2) / z
@@ -41,3 +37,9 @@ def gamma(z):
         t = z + g + 0.5
         ax_3 = (t ** (z + 0.5)) * cmath.exp(-t)
         return ((ax_1 * ax2_sum) * ax_3).real
+
+
+# combinations and permutations
+#~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+def n_comb_k(n, k):
+    return math.factorial(n)/(math.factorial(k) * math.factorial(n - k))
