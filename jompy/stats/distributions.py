@@ -1,15 +1,61 @@
-import numpy as np
 from jompy.functions import utils
+import numpy as np
+import math
+import cmath
 
 
 class Weibull(object):
-    def __init__(self, data, alpha, beta):
+    def __init__(self, alpha, beta):
         self.a = alpha
         self.b = beta
+
+    def pdf(self, x):
+        """
+        pdf computes the probability density at x for a Weilbull distribution
+        with scale alpha and exponent beta
+        """
+        return (self.a / self.b) * (x / self.b) ** (self.a - 1) * math.exp(-(x/self.b) ** self.a)
+
+    def cdf(self):
+        pass
+
+    def quantile(self):
+        pass
+
+    def mean(self):
+        pass
+
+    def median(self):
+        pass
+
+    def variance(self):
+        pass
+
+    def mode(self):
+        pass
+
+    def skewness(self):
+        pass
+
+    def kurtosis(self):
+        pass
+
+    def kurtosis_excess(self):
+        pass
+
+    def ml(self):
+        """ Maximum likelihood """
+        pass
+
+
+class WeibullAnalysis(Weibull):
+    def __init__(self, data, alpha, beta):
+        super().__init__(alpha, beta)
+
         self.data = data
         self.sample = []
 
-        # check
+        # check if input date is in ascending order
         self.initial_check()
 
     def initial_check(self):
@@ -27,40 +73,6 @@ class Weibull(object):
         except Exception as err:
             print("incorrect input data, check format. {}".format(err.args[0]))
 
-    def pdf(self):
-        pass
-
-    def cdf(self):
-        pass
-
-    def quantile(self):
-        pass
-
-    def mean(self):
-        pass
-
-    def median(self):
-        pass
-
-    def mode(self):
-        pass
-
-    def variance(self):
-        pass
-
-    def skewness(self):
-        pass
-
-    def kurtosis(self):
-        pass
-
-    def failure_rate(self):
-        pass
-
-    def ml(self):
-        """ Maximum likelihood """
-        pass
-
     def cfd(self):
         """ Cumulative failure distribution """
         sample_size = len(self.sample)
@@ -69,6 +81,9 @@ class Weibull(object):
             return self.bernard_approx(failure_rank, sample_size)
         else:
             return self.mean_ranks(failure_rank, sample_size)
+
+    def failure_rate(self):
+        pass
 
     @staticmethod
     def bernard_approx(rank, size):
